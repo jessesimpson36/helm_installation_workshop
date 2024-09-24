@@ -1,0 +1,9 @@
+global:
+  opensearch:
+    tls:
+      existingSecret:
+  elasticsearch:
+    enabled: false
+
+elasticsearch:
+  replicas: 1

@@ -1,0 +1,10 @@
+global:
+  opensearch:
+    tls:
+      existingSecret:
+  elasticsearch:
+    tls:
+      existingSecret:
+
+elasticsearch:
+  replicas: 2

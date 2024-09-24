@@ -1,0 +1,12 @@
+
+global:
+  opensearch:
+    tls:
+      existingSecret: someSecret
+  elasticsearch:
+    tls:
+      existingSecret: someSecret
+
+nil_bool:
+  elasticsearch:
+    replicas: 2

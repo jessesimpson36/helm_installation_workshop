@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jesse
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      jesse: jesse
+  serviceName: jesse
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        jesse: jesse
+    spec:
+      containers:
+        - name: zeebe
+          image: camunda/zeebe:SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          env:
+            {{- if or .Values.global.elasticsearch.tls.existingSecret .Values.global.opensearch.tls.existingSecret }}
+            - name: JAVA_TOOL_OPTIONS
+              value: -Djavax.net.ssl.trustStore=/usr/local/zeebe/certificates/externaldb.jks
+            {{- else }}
+            - name: JAVA_TOOL_OPTIONS
+              value: jesse
+            {{- end }}
